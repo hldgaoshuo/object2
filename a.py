@@ -67,3 +67,14 @@ def make_account_class():
         'withdraw': withdraw,
         'interest': 0.02,
     })
+
+Account = make_account_class()
+
+def make_checking_account_class():
+    """Return the CheckingAccount class, which imposes a $1 withdrawal fee."""
+    def withdraw(self, amount):
+        return Account['get']('withdraw')(self, amount + 1)
+    return make_class({
+        'withdraw': withdraw,
+        'interest': 0.01,
+    }, Account)
