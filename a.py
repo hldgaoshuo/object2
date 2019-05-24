@@ -1,5 +1,6 @@
 def make_instance(cls):
     """Return a new object instance, which is a dispatch dictionary."""
+    attributes = {}
     def get_value(name):
         if name in attributes:
             return attributes[name]
@@ -8,8 +9,10 @@ def make_instance(cls):
             return bind_method(value, instance)
     def set_value(name, value):
         attributes[name] = value
-    attributes = {}
-    instance = {'get': get_value, 'set': set_value}
+    instance = {
+        'get': get_value, 
+        'set': set_value,
+    }
     return instance
 
 def bind_method(value, instance):
@@ -32,7 +35,11 @@ def make_class(attributes, base_class=None):
         attributes[name] = value
     def new(*args):
         return init_instance(cls, *args)
-    cls = {'get': get_value, 'set': set_value, 'new': new}
+    cls = {
+        'get': get_value,
+        'set': set_value,
+        'new': new,
+    }
     return cls
 
 def init_instance(cls, *args):
