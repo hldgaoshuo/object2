@@ -1,3 +1,6 @@
+'''
+应当从整体模式出发去考虑，而不是谁调用了谁，产生了什么结果。
+'''
 def make_instance(cls):
     """Return a new object instance, which is a dispatch dictionary."""
     attributes = {}
@@ -24,6 +27,9 @@ def bind_method(value, instance):
     else:
         return value
 
+"""
+make_class只包含选择器与构造器，属性由其它方法传入。
+"""
 def make_class(attributes, base_class=None):
     """Return a new class, which is a dispatch dictionary."""
     def get_value(name):
